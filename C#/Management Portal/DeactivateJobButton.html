@@ -1,0 +1,40 @@
+            @foreach (var Job in Model)
+            {
+<table id="tblSchedule" class="table table-striped table-light rounded-lg" border=1 frame=void rules=rows>
+
+    <tr>
+        <td>
+            @Html.DisplayFor(Model => Job.Key.JobTitle)
+        </td>
+        @if (Job.Key.Active == true)
+        {
+        <td>
+            <!--DEACTIVATE JOB BUTTON-->
+            @using (Html.BeginForm("UpdateActive", "Jobs", FormMethod.Post, new { id = $"updateForm_{Job.Key.JobIb}"}))
+            {
+            <input type="hidden" name="jobIb" value="@Job.Key.JobIb" />
+            @Html.AntiForgeryToken()
+            <input class="btn btn-primary btn-sm" onclick="updateJob('@Job.Key.JobIb')" value="Deactivate Job" type="button">
+            }
+        </td>
+        }
+        @if (Job.Key.Active == false)
+        {
+        <td>
+            <!-- ACTIVATE JOB BUTTON -->
+            @using (Html.BeginForm("UpdateActive", "Jobs", FormMethod.Post, new { id = $"updateForm_{Job.Key.JobIb}"}))
+            {
+            <input type="hidden" name="jobIb" value="@Job.Key.JobIb" />
+            @Html.AntiForgeryToken()
+            <input class="btn btn-primary btn-sm" onclick="updateJob('@Job.Key.JobIb')" value="Activate Job" type="button">
+            }
+        </td>
+        }
+
+        <td align="right">
+            @Html.ActionLink("Edit", "Edit", "Jobs", new { id = Job.Key.JobIb }, new { @class = "jobEdit" })
+            @Html.ActionLink("Details", "Details", "Jobs", new { id = Job.Key.JobIb }, new { @class = "jobDetails" })
+            @Html.ActionLink("Delete", "Delete", "Jobs", new { id = Job.Key.JobIb }, new { @class = "jobDelete" })
+        </td>
+    </tr>
+</table>

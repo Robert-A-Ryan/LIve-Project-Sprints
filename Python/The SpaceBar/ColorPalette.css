@@ -1,0 +1,23 @@
+/* ROOT SETUP */
+:root {
+    --primary: #4958bb;
+    --secondary: #cdaf67;
+    --success: #6c7742;
+    --light: #cad0ee;
+    --medlight: #17a2b8;
+    --dark: #072A70;
+    /* RR added these as our Color Palette 5-06-19 */
+    }
+
+    .btn-primary {
+        background-color: var(--medlight);
+      }
+      
+      .btn-primary:hover {
+        background-color: var(--primary);
+      }
+      
+      .btn-primary:focus {
+        background-color: var(--primary);
+        color: white;
+      

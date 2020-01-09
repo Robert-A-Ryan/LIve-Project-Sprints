@@ -1,0 +1,96 @@
+{% if user.is_authenticated %}
+
+    <!-- Header -->
+    <section id="home_header">
+        <header class="site-header">
+        <div class="header-container">
+            <div class="mx-auto text-center">      
+            <h1>Entertainment</h1>
+            <h2 class="text-white-50 mx-auto mt-2 mb-5">Here are some distractions while you wait...</h2>
+                    
+            <!-- Services Section -->
+            <section id="services">
+                <a href="expand-collapse" class="btn btn-primary js-scroll-trigger" data-toggle="collapse" data-target="#buttonlist" role="button">Entertainment</a>
+                <br><br><br>
+
+                <div class="collapse" id="buttonlist">
+                <div class="btn-block">
+                    <a href="{% url 'trivia' %}" class="btn btn-primary button-css">Trivia</a>
+                    <a href="{% url 'entertainment' %}" class="btn btn-primary button-css">New Game</a>
+                    <a href="{% url 'entertainment' %}" class="btn btn-primary button-css">New Game</a>
+                </div>
+                <br>
+                
+                <div class="btn-block">
+                    <a href="{% url 'entertainment' %}" class="btn btn-primary button-css">New Game</a>
+                    <a href="{% url 'entertainment' %}" class="btn btn-primary button-css">New Game</a>
+                    <a href="{% url 'entertainment' %}" class="btn btn-primary button-css">New Game</a>
+                </div>
+                </div>
+            </section> 
+            <!-- End Services Section -->
+            </div>
+        </div>
+        </header>
+    </section>
+    <!-- End Header -->
+
+    {% else %}
+
+    {% endif %}
+
+
+{% extends 'base.html' %}
+{% load static %}
+
+{% block pagetitle %}SpaceBar Trivia{% endblock %}
+{% block content %}
+{% include 'navbar.html' %}
+<section class='about-section'>
+    <div class='container'>
+        <div class='row'>
+            <div class='col-lg-8 mx-auto'>
+                <h1 class='text-white-50'>SpaceBar Trivia </h1>
+            </div>
+        </div>
+        <div class='row'>
+            <form action='testAnswer' method='POST'>
+                <!--This is where the question from the API will be posted.-->
+                {% csrf_token %}
+                <div class='form-group'>
+                    <label class='text-white-50' for='questions'>Question: <br>{{ questions|safe }} </label>
+                </div>
+                <!--These are the radio buttons with the choices for answers, will still need to be setup to only show buttons for actual answer values ie true/false answers should only show 2 buttons.-->
+                {% for answer in answers %}
+                <div class='custom-control custom-radio text-white-50'>
+                    <input type='radio' id='answer_{{ answer }}' name='answer' class='custom-control-input' value='{{ answer }}'>
+                    <label class='custom-control-label' for='answer_{{ answer }}'>{{ answer|safe }} </label>
+                </div>
+                {% endfor %}
+                <!--hiding the below so that the correct answer is brought forward but not shown.-->
+                <div hidden>
+                    <input type='text' id='correct_{{ correct }}' name='correct' value='{{correct}}'>
+                    <label class='custom-control-label' for='correct_{{ correct }}'></label>
+                </div>
+                <br>
+                <!--Submit button to submit your radio button choice.-->
+                <div>
+                    <input class='btn btn-primary' type='submit' value='Submit'>
+                </div>
+                <br>
+                <div class='col-xs-4'>
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div class='alert alert-success' role='alert'>
+                                <button type='button' class='close' data-dismiss='alert' aria-label='Close'><span aria-hidden='true'>&times;</span></button>
+                                <center> {{ message }} </center>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+            </form>
+        </div>
+    </div>
+</section>   
+{% include 'footer.html' %}
+{% endblock %}

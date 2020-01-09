@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+{% include "navbar.html" %}
+    <section id="home_header">
+        <header class="site-header container">
+            <div class="header-container">
+                <div class="mx-auto text-center" id="registerHeader">      
+                    <h1>The Spacebar</h1>
+                    <h1 id="createAccountHeader">Create New Account</h1>
+                    <div class="jumbotron registerPage form-group">
+                        <div class="container col-md-8">               
+                            <form class="text-white text-left" method="POST">
+                                {% csrf_token %}                                                                
+                                {% load widget_tweaks %}
+                                {% if messages %}
+                                    <ul class='messages'>
+                                        {% for message in messages %}
+                                            <li {% if message.tags %} class=' {{ message.tags}}'{% endif %}> {{ message }}</li>
+                                        {% endfor %}
+                                    </ul>
+                                {% endif %}
+                                <p class="lead registerForm">
+                                    Username: 
+                                    {% render_field form.username class+="form-control" %}
+                                    {{ form.username.errors }}
+                                </p>
+                                <p class="lead registerForm">
+                                    Password: 
+                                    {% render_field form.password1 class+="form-control" id+="Password" %}
+                                </p>
+                                <p class="lead registerForm">
+                                    Password confirmation: 
+                                    {% render_field form.password2 class+="input-lg form-control" data-trigger="focus" %}
+                                </p>
+                                <div id="pwd_strength_wrap">
+                                    <div id="passwordDescription">Password not entered</div>
+                                    <div id="passwordStrength" class="strength0"></div>
+                                    <div id="pswd_info">
+                                        <strong>Strong Password Tips:</strong>
+                                        <ul>
+                                            <li class="invalid" id="length">At least 6 characters</li>
+                                            <li class="invalid" id="pnum">At least one number</li>
+                                            <li class="invalid" id="capital">At least one lowercase &amp; one uppercase letter</li>
+                                            <li class="invalid" id="spchar">At least one special character</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <br>
+                                <button id="registerButton" class="form-control"><strong>Register</strong></button>                               
+                            </form>  
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+    </section>
+                
+                
+                                        <br><br><br>
+{% include "footer.html" %}
+{% endblock %}

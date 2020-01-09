@@ -1,0 +1,34 @@
+:root {
+    /*Color Palette 010620 RR - developed at https://coolors.co/01295f-437f97-849324-ffb30f-fd151b */
+    --primary-color: #01295f; /*Cool Black - dark blue*/
+    --secondary-color: #437f97; /*Queen Blue*/
+    --success-color: #ffb30f; /*Dark Tangerine*/
+    --alert-color: #Fd151b; /*Vivid Red*/
+    --danger-color: #fd151b; /*Vivid Red*/
+    --info-color: #849324; /*Olive Drab(#3)*/
+}
+
+body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
